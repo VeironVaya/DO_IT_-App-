@@ -16,8 +16,16 @@ class _HomePageState extends State<HomePage> {
   void saveAct() {
     setState(() {
       Activity.add([_controller.text, false]);
+      _controller.clear();
     });
     Navigator.of(context).pop();
+  }
+
+  //delete activity function
+  void deleteAct(int index) {
+    setState(() {
+      Activity.removeAt(index);
+    });
   }
 
   // text controller
@@ -77,7 +85,8 @@ class _HomePageState extends State<HomePage> {
             return DoItTile(
                 actName: Activity[index][0],
                 actStatus: Activity[index][1],
-                onChanged: (value) => checkBoxBehav(value, index));
+                onChanged: (value) => checkBoxBehav(value, index),
+                deleteAct: (context) => deleteAct(index));
           },
         ));
   }
